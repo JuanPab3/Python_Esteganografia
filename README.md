@@ -1,13 +1,13 @@
 # Python y Esteganografía
 
 
-Este proyecto nace como una idea, hay mucha información en el mundo. Hay tanta que es difícil protegerla de todo _miron_ que con buena o mala intención se acerca a husmear.
+Este proyecto nace como una idea, hay mucha información en el mundo. Hay tanta que es difícil protegerla de todo _miron_ que con buena o mala intención se acerca a husmear. La ventaja que nos trae la existencia de tanta información son los distintos canales donde esta puede circular. Y ahí encontramos nuestra oportunidad, pues cuando alguien lee un **.txt** esperan cierto tipo de información, información que no esperan de un **.jpg** (o viceversa).
 
 ### Markdown
 
 Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
 
-```markdown
+```markdow
 Syntax highlighted code block
 
 # Header 1

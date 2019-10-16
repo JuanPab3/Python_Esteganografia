@@ -1,8 +1,7 @@
 # Python y Esteganografía
 
-You can use the [editor on GitHub](https://github.com/JuanPab3/Python_Audio_Esteganografia/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Este proyecto nace como una idea, hay mucha información en el mundo. Hay tanta que es difícil protegerla de todo _miron_ que con buena o mala intención se acerca a husmear.
 
 ### Markdown
 

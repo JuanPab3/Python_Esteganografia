@@ -23,7 +23,7 @@ Syntax highlighted code block
 
 **Bold** and _Italic_ and `Code` text
 
-[Link](url) and ![Image](https://static1.abc.es/Media/201403/20/burmese-python--478x530.jpg)
+[Link](url) and ![https://static1.abc.es/Media/201403/20/burmese-python--478x530.jpg]
 ```
 
 For more details see [GitHub Flavored Markdown](https://www.youtube.com/watch?v=e1IyzVyrLSU).

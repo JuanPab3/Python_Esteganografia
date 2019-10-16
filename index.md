@@ -37,6 +37,6 @@ Your Pages site will use the layout and styles from the Jekyll theme you have se
 ### Contacto
 
 El equipo está integrado por:
-- [Juan Pablo Sierra Useche](juanp.sierra@urosario.edu.co)
-- [Nataly Alejandra Sarmiento Ospina](natalya.sarmiento@urosario.edu.co)
-- [Juan David Castillo Gomez](juandav.castillo@urosario.edu.co)
+- [Juan Pablo Sierra Useche](mailto:juanp.sierra@urosario.edu.co)
+- [Nataly Alejandra Sarmiento Ospina](mailto:natalya.sarmiento@urosario.edu.co)
+- [Juan David Castillo Gomez](mailto:juandav.castillo@urosario.edu.co)

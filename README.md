@@ -28,21 +28,26 @@ Entonces aprovechando esta oportunidad que nos entrega la sobrecarga de informac
 1. Python 3
 2. IDE (Integrated Development Enviroment)
 3. Librerias de python tales cómo:
-  ```
-  import sys, os, math, numpy, matlablib, django, skimage, PIL
-  ```
+```
+import sys, os, math, numpy, matlablib, django, skimage, PIL
+```
 
 
 ## Posibles Problemas
 
-
+1. Correcta optimización del tiempo.
+2. Implementación correcta del proyecto en la pagina web.
+3. Realizar un diseño intuitivo.
 
 
 ---
 ### Contacto
-<br/>
+
 El equipo está integrado por:
-<br/>
+
 - [Juan Pablo Sierra Useche](mailto:juanp.sierra@urosario.edu.co)
 - [Nataly Alejandra Sarmiento Ospina](mailto:natalya.sarmiento@urosario.edu.co)
 - [Juan David Castillo Gomez](mailto:juandav.castillo@urosario.edu.co)
+---
+
+muchas gracias <3

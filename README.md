@@ -28,9 +28,9 @@ Entonces aprovechando esta oportunidad que nos entrega la sobrecarga de informac
 1. Python 3
 2. IDE (Integrated Development Enviroment)
 3. Librerias de python tales cómo:
-```
-import sys, os, math, numpy, matlablib, django, skimage, PIL
-```
+  ```
+  import sys, os, math, numpy, matlablib, django, skimage, PIL
+  ```
 
 
 ## Posibles Problemas

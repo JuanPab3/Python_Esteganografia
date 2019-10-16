@@ -48,6 +48,6 @@ El equipo está integrado por:
 - [Juan Pablo Sierra Useche](mailto:juanp.sierra@urosario.edu.co)
 - [Nataly Alejandra Sarmiento Ospina](mailto:natalya.sarmiento@urosario.edu.co)
 - [Juan David Castillo Gomez](mailto:juandav.castillo@urosario.edu.co)
----
+__ __ __ __
 
 muchas gracias <3

@@ -39,3 +39,35 @@ def hide_(filename, message):
         digit = 0
         temp = ""
         for e_pix in datas: #e_pix = each pixel
+            if (digit < len(binary)):
+                new_pix = encode(rgb2hex(e_pix[0],e_pix[1],e_pix[2], binary [digit]))
+                if new_pix == None:
+                    new_data.append(e_pix)
+                else:
+                    r,g,b = hex2rgb(new_pix)
+                    new_data.append((r,g,b,255))
+                    digit += 1
+            else:
+                new_data.append(e_pix)
+        img.putdata(new_data)
+        img.save(filename, "PNG")
+        return "Completed"
+    return "El archivo cumple con el formato, no se pudo esconder el texto"
+def return_(filename):
+    img = im.open(filename)
+    binary = ""
+    if img.mode in ("RGBA"):
+        img = img.comvert("RGBA")
+        datas = im.getdata()
+
+        for e_pix  in datas:
+            digit = decode(rgb2hex(e_pix[0],e_pix[1],e_pix[2]))
+            if digit == None:
+                pass
+            else:
+                binary += digit
+                if (binary[-16] == "1111111111111110"):
+                    print("Success")
+                    return bin2str(binary[:-16])
+        return bin2str(binary)
+    return "El archivo cumple con el formato, no se pudo recuperar el texto"

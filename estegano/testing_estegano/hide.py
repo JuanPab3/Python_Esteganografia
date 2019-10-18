@@ -116,7 +116,7 @@ def decode():
 # Main Function
 def main():
     a = int(input(":: Welcome to Steganography ::\n"
-                        "1. Encode\n2. Decode\n--> "))
+                        "1. Encode\n2. Decode\n"))
     if (a == 1):
         encode()
 

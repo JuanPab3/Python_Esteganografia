@@ -14,20 +14,21 @@ class Esteganew:
     imagen.
     """
 
-    def __init__(self, nombre_imagen:str, mensaje:str, nuevo_nombre:str):
+    def __init__(self, nombre_imagen:str, mensaje = None, nuevo_nombre = None ):
         """
         Esta clase tiene requiere en un principio como primer argumento el
         nombre de la imagen que será utilizada (con extención tipo: '.png',
         '.tiff,' .jpg'... etc.) de tipo 'str', como segundo argumento el
         mensaje que se desea esconder tambien de tipo 'str' y para el tercer
-        argumento se exige un nombre para el archivo de salida tambien con
-        extención y de tipo 'str'.
+        argumento se exige un nombre para el archivo de salida de tipo 'str'.
         """
+
         self.imagen = im.open(nombre_imagen, 'r')
         self.copia_img = self.imagen.copy()
         self.mensaje = mensaje
         self.pixeles =  self.copia_img.getdata()
         self.nuevo_nombre = nuevo_nombre
+
 
     def generar_data(self):
         """
@@ -36,6 +37,7 @@ class Esteganew:
         un principio transformandolo a su valor en Unicode, y luego este a
         binario.
         """
+
         lista_data = []
         for i in self.mensaje:
             lista_data.append(format(ord(i), '08b'))
@@ -43,11 +45,17 @@ class Esteganew:
 
     def modificar_pixeles(self):
         """
-        La razón de esta función es la de convertir los pixeles necesarios de la
+        La razón de esta función es la de convertir los pixeles necesario
+
+
+
+
+
+s de la
         imagen (según lo largo del mensaje) en nuvos pixeles alterando el valor
         RGB de cada pixel reduciendolo en una unidad.
-
         """
+
         lista_data = self.generar_data()
         tamano_data = len(lista_data)
         pixel = self.pixeles
@@ -64,44 +72,143 @@ class Esteganew:
             pixel = [valor for valor in imagen_data.__next__()[:3]+
                                         imagen_data.__next__()[:3]+
                                         imagen_data.__next__()[:3]]
-            print(pixel)
-            print(self.mensaje[i])
-            print(lista_data[i])
 
 
-            #Esta iteración convierte los valores impares (del valor R.G o B)
-            #en 1 y los valores pares en 0, así formando el mensaje.
+            #El proceso de alteración de los pixel comienza comparando el
+            #valor binario de cada letra con los valores de cada 3 pixeles
+            #(R,G,B,R,G,B,R,G,B) ,utilizando los primeros 8 valores para
+            #esconder el mensaje y el ultimo para definir la longitud del
+            #mensaje al momento de decodificarlo.
+
+            #En la primera parte compara cada bit de cada letra con su
+            #respectiva posicion en la tupla (R,G,B,R,G,B,R,G,B), si el
+            #valor del bit es igual a '0' y el valor de color en la tupla
+            #dividido en 2 deja reciduo, se le resta una unidad al valor
+            #de la tupla, si el valor del bit es igual a '4' y el valor
+            #de color en la tupla dividido en 2 no deja reciduo, se le
+            #resta una unidad al valor de la tupla.
             for j in range(0,8):
+
                 if (lista_data[i][j] == "0") and (pixel[j]%2 != 0):
                     pixel[j] -= 1
 
                 elif (lista_data[i][j] == "1") and (pixel[j] % 2 == 0):
                     pixel[j] -= 1
 
-            #La función va a estar diseñada para revisar el valor de la octava
-            #cifra de cada pixel (la variable l.61), si el valor de esa cifra
-            #es de 0 significa que debe continuar leyendo, pero si el valor de
-            #la cifra es de 1 significa que el mensaje termino.
+            #Este condicional revisa si el mensaje ya codificado completamente,
+            #para que el decodificador sea capaz de interpretarlo se acuerda
+            #si el ultimo valor de la tupla (R,G,B,R,G,B,R,G,B) es par el
+            #mensaje continua y si el valor es impar, significa que el mensaje
+            #ya a acabado.
             if (i == tamano_data - 1):
-                if (pixel[-1] % 2 != 0):
+                if (pixel[-1] % 2 == 0):
                     pixel[-1] -= 1
             else:
                 if (pixel[-1] % 2 != 0):
                     pixel[-1] -= 1
 
             pixel = tuple(pixel)
-            print("{}\n".format(pixel))
-            # print( pixel[0:3])
-            # print( pixel[3:6])
-            # print( pixel[6:9])
+            yield pixel[0:3]
+            yield pixel[3:6]
+            yield pixel[6:9]
 
 
+    def cambiar_pix(self):
+        """
+        Esta función se encarga de modificar ya en la nueva image los valores
+        de los pixeles. A partir de las cordenadas (x, y) de la imagen.
+        """
 
+        #El ancho de la imagen
+        w = self.copia_img.size[0]
+        (x, y) = (0, 0)
 
+        for pix in self.modificar_pixeles():
+            self.copia_img.putpixel((x,y),pix)
+            if (x == w - 1):
+                x = 0
+                y += 1
+            else:
+                x += 1
 
+    def codificar(self):
+        """
+        La función codificar() esta dada para retornar un archivo en
+        formato '.png', con el mensaje ya escondido.
+        """
 
+        if (self.mensaje == None):
+            raise Exception("Necesitas un mensaje si quieres codificar.")
+        elif (self.nuevo_nombre == None):
+            raise Exception("Necesitas un nuevo nombre para el archivo si quieres codificar.")
+        else:
+            self.cambiar_pix()
+            self.copia_img.save("{}.png".format(self.nuevo_nombre), "PNG")
 
+    def decodificar(self):
+        """
+        Esta función cumple la labor de retornar el mensaje oculto dentro de
+        la imagen.
+        """
+        if (self.mensaje != None):
+            raise Exception("No necesitas un mensaje si quieres decodificar.")
+        elif (self.nuevo_nombre != None):
+            raise Exception("No necesitas un nuevo nombre para el archivo si quieres decodificar.")
+        else:
+            mensaje_secreto = ""
+            imagen_data = iter(self.imagen.getdata())
 
+            while (True):
+                pixeles = [valor for valor in imagen_data.__next__()[:3]+
+                                            imagen_data.__next__()[:3]+
+                                            imagen_data.__next__()[:3]]
+
+                str_binario = ""
+
+                for i in pixeles[:8]:
+                    if (i % 2 == 0):
+                        str_binario += "0"
+                    else:
+                        str_binario += "1"
+
+                mensaje_secreto += chr(int(str_binario, 2))
+                if pixeles[-1] % 2 != 0:
+                    return mensaje_secreto
 
 #------------------------------------FUNCIONES----------------------------------
 #------------------------------------CODIGO-------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#

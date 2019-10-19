@@ -45,13 +45,7 @@ class Esteganew:
 
     def modificar_pixeles(self):
         """
-        La razón de esta función es la de convertir los pixeles necesario
-
-
-
-
-
-s de la
+        La razón de esta función es la de convertir los pixeles necesarios de la
         imagen (según lo largo del mensaje) en nuvos pixeles alterando el valor
         RGB de cada pixel reduciendolo en una unidad.
         """
@@ -177,38 +171,3 @@ s de la
 
 #------------------------------------FUNCIONES----------------------------------
 #------------------------------------CODIGO-------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#

@@ -87,7 +87,10 @@ class Esteganew:
                     pixel[j] -= 1
 
                 elif (lista_data[i][j] == "1") and (pixel[j] % 2 == 0):
-                    pixel[j] -= 1
+                    if pixel[j] != 0:
+                        pixel[j] -= 1
+                    else:
+                        pixel[j] += 1
 
             #Este condicional revisa si el mensaje ya codificado completamente,
             #para que el decodificador sea capaz de interpretarlo se acuerda
@@ -170,4 +173,23 @@ class Esteganew:
                     return mensaje_secreto
 
 #------------------------------------FUNCIONES----------------------------------
+def main    ():
+    print("Bienvenido a Esteganew")
+    print("{}".format("="*22))
+    respuesta0 = input("Marca 1 si quieres codificar o 2 si quieres decodificar.\n--> ")
+    if (respuesta0 == "1"):
+        nombre_imagen = input("Inserta el nombre de la imagen que desea codificar.\n(Es necesari escribirla con el formato('.png', '.jpg', '.tiff'... etc)\n--> ")
+        mensaje = input("Inserta el mensaje que quiere encriptar.\n--> ")
+        nuevo_nombre = input("Inserta un nombre para el archivo de salida.\n--> ")
+        imag_cod = Esteganew(nombre_imagen,mensaje,nuevo_nombre)
+        imag_cod.codificar()
+    elif (respuesta0 == "2"):
+        nombre_imagen = input("Inserta el nombre de la imagen que desea decodificar.\n(Es necesari escribirla con el formato('.png', '.jpg', '.tiff'... etc)\n--> ")
+        imag_dec = Esteganew(nombre_imagen)
+        print(imag_dec.decodificar())
+    else:
+        raise Exception("Esa opción no se encuentra disponible")
+
 #------------------------------------CODIGO-------------------------------------
+if __name__ == '__main__':
+    main()

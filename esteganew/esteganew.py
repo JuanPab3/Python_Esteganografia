@@ -172,16 +172,43 @@ class Esteganew:
                 if pixeles[-1] % 2 != 0:
                     return mensaje_secreto
 
+    def max_input(self):
+        """
+        Documentación
+        """
+        anchura, altura  = self.imagen.size
+        pixel = anchura * altura
+        return pixel//3
+
+
+
+
 #------------------------------------FUNCIONES----------------------------------
-def main    ():
+def main():
     print("Bienvenido a Esteganew")
     print("{}".format("="*22))
     respuesta0 = input("Marca 1 si quieres codificar o 2 si quieres decodificar.\n--> ")
     if (respuesta0 == "1"):
         nombre_imagen = input("Inserta el nombre de la imagen que desea codificar.\n(Es necesari escribirla con el formato('.png', '.jpg', '.tiff'... etc)\n--> ")
-        mensaje = input("Inserta el mensaje que quiere encriptar.\n--> ")
+        imag_cod = Esteganew(nombre_imagen)
+        if (imag_cod.max_input() > 4095):
+            max_mensaje = 4095
+        else:
+            max_mensaje = imag_cod.max_input()
+
+        print("Tu mensaje solo puede tener {} caracteres (los espacios y la puntuación tambien cuentan)".format(4095))
+        valor = False
+
+        while valor == False:
+            mensaje = input("Inserta el mensaje que quiere encriptar.\n--> ")
+            if len(mensaje) > max_mensaje:
+                print("El mensaje es muy largo, intentalo de nuevo")
+            elif len(mensaje) <= max_mensaje:
+                valor = True
+
+        imag_cod.mensaje = mensaje
         nuevo_nombre = input("Inserta un nombre para el archivo de salida.\n--> ")
-        imag_cod = Esteganew(nombre_imagen,mensaje,nuevo_nombre)
+        imag_cod.nuevo_nombre = nuevo_nombre
         imag_cod.codificar()
     elif (respuesta0 == "2"):
         nombre_imagen = input("Inserta el nombre de la imagen que desea decodificar.\n(Es necesari escribirla con el formato('.png', '.jpg', '.tiff'... etc)\n--> ")

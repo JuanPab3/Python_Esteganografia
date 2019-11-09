@@ -5,6 +5,8 @@ puede abrir y alterar imagenes. Se va exportar con el apodo 'im' para mayor
 facilidad de uso.
 """
 from PIL import Image as im
+from AESCipher import enCRYptar, deCRYptar
+
 
 #-------------------------------------CLASES------------------------------------
 class Esteganew:
@@ -177,16 +179,29 @@ def main    ():
     print("Bienvenido a Esteganew")
     print("{}".format("="*22))
     respuesta0 = input("Marca 1 si quieres codificar o 2 si quieres decodificar.\n--> ")
+
+#=========================== C O D I F I C A R =================================
+
     if (respuesta0 == "1"):
         nombre_imagen = input("Inserta el nombre de la imagen que desea codificar.\n(Es necesari escribirla con el formato('.png', '.jpg', '.tiff'... etc)\n--> ")
         mensaje = input("Inserta el mensaje que quiere encriptar.\n--> ")
+        mensaje = enCRYptar(mensaje)
         nuevo_nombre = input("Inserta un nombre para el archivo de salida.\n--> ")
         imag_cod = Esteganew(nombre_imagen,mensaje,nuevo_nombre)
         imag_cod.codificar()
+
+#=========================== D E C O D I F I C A R =============================
+
     elif (respuesta0 == "2"):
         nombre_imagen = input("Inserta el nombre de la imagen que desea decodificar.\n(Es necesari escribirla con el formato('.png', '.jpg', '.tiff'... etc)\n--> ")
         imag_dec = Esteganew(nombre_imagen)
-        print(imag_dec.decodificar())
+        archivo_clave = input("Ya tenemos tu mensaje, escribe el nombre del archivo con la clave para que te retornemos el mensaje:\n")
+        mensaje_pre = imag_dec.decodificar()
+        mensaje_post = deCRYptar(mensaje_pre,archivo_clave)
+        print(mensaje_post)
+
+#============================== E R R O R ======================================
+
     else:
         raise Exception("Esa opción no se encuentra disponible")
 

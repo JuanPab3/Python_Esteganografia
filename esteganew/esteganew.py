@@ -4,8 +4,11 @@ PIL (Python Image Library) va a ser utilizada ya que dentro de sus funciones uno
 puede abrir y alterar imagenes. Se va exportar con el apodo 'im' para mayor
 facilidad de uso.
 """
+from os import system, name
+from time import sleep
 from PIL import Image as im
-from AESCipher import enCRYptar, deCRYptar
+from AESCipher import enCRYptar, deCRYptar, clear
+
 
 
 #-------------------------------------CLASES------------------------------------
@@ -16,6 +19,7 @@ class Esteganew:
     imagen.
     """
 
+
     def __init__(self, nombre_imagen:str, mensaje = None, nuevo_nombre = None ):
         """
         Esta clase tiene requiere en un principio como primer argumento el
@@ -24,8 +28,15 @@ class Esteganew:
         mensaje que se desea esconder tambien de tipo 'str' y para el tercer
         argumento se exige un nombre para el archivo de salida de tipo 'str'.
         """
+        try:
+            self.imagen = im.open(nombre_imagen, 'r')
+        except:
+            clear()
+            print("Lo sentimos, pero el proceso no puede ser terminado :(")
+            sleep(5)
+            clear()
+            raise SystemExit
 
-        self.imagen = im.open(nombre_imagen, 'r')
         self.copia_img = self.imagen.copy()
         self.mensaje = mensaje
         self.pixeles =  self.copia_img.getdata()
@@ -175,7 +186,11 @@ class Esteganew:
                     return mensaje_secreto
 
 #------------------------------------FUNCIONES----------------------------------
-def main    ():
+
+
+def main():
+
+    clear()
     print("Bienvenido a Esteganew")
     print("{}".format("="*22))
     respuesta0 = input("Marca 1 si quieres codificar o 2 si quieres decodificar.\n--> ")
@@ -183,27 +198,74 @@ def main    ():
 #=========================== C O D I F I C A R =================================
 
     if (respuesta0 == "1"):
+        clear()
         nombre_imagen = input("Inserta el nombre de la imagen que desea codificar.\n(Es necesari escribirla con el formato('.png', '.jpg', '.tiff'... etc)\n--> ")
-        mensaje = input("Inserta el mensaje que quiere encriptar.\n--> ")
+        clear()
+        print("Inserta el mensaje que quiere encriptar.")
+        mensaje = input("(El mensaje debe ser menor a 4095 caracteres)\n--> ")
+        while True:
+            counter = 1
+            clear()
+            for i in range(len(mensaje)):
+                counter += 1
+            if counter > 4095:
+                print("Recuerda que el limite son 4095 caracteres contando simbolos y espacios.")
+                print("""                        INTENTLO DE NUEVO""")
+                sleep(4)
+                clear()
+                print("Inserta el mensaje que quiere encriptar.")
+                mensaje = input("(El mensaje debe ser menor a 4095 caracteres)\n--> ")
+            else:
+                break
+
+
+        clear()
         mensaje = enCRYptar(mensaje)
         nuevo_nombre = input("Inserta un nombre para el archivo de salida.\n--> ")
         imag_cod = Esteganew(nombre_imagen,mensaje,nuevo_nombre)
         imag_cod.codificar()
+        clear()
+        print("""                  ============================================""")
+        print("""                  Muchas Gracias El Trabajo Ha Sido Completado""")
+        print("""                  ============================================""")
+        sleep(5)
+        clear()
 
 #=========================== D E C O D I F I C A R =============================
 
     elif (respuesta0 == "2"):
+        clear()
         nombre_imagen = input("Inserta el nombre de la imagen que desea decodificar.\n(Es necesari escribirla con el formato('.png', '.jpg', '.tiff'... etc)\n--> ")
         imag_dec = Esteganew(nombre_imagen)
+        clear()
         archivo_clave = input("Ya tenemos tu mensaje, escribe el nombre del archivo con la clave para que te retornemos el mensaje:\n")
         mensaje_pre = imag_dec.decodificar()
         mensaje_post = deCRYptar(mensaje_pre,archivo_clave)
-        print(mensaje_post)
+
+        # ======= RETORNAR ARCHIVO ========
+        clear()
+
+        while True:
+            nombre_archivo = input("Inserta un nombre para el archivo de salida.\n")
+            break
+
+        archivo = open("{}.txt".format(nombre_archivo), "w")
+        archivo.write(mensaje_post)
+        archivo.close()
+        clear()
+        print("""                  ============================================""")
+        print("""                  Muchas Gracias El Trabajo Ha Sido Completado""")
+        print("""                  ============================================""")
+        sleep(5)
+        clear()
 
 #============================== E R R O R ======================================
 
     else:
-        raise Exception("Esa opción no se encuentra disponible")
+        clear()
+        print("Esa opción no se encuentra disponible")
+        sleep(3)
+        raise main()
 
 #------------------------------------CODIGO-------------------------------------
 if __name__ == '__main__':

@@ -225,6 +225,13 @@ def main():
         imag_cod = Esteganew(nombre_imagen,mensaje,nuevo_nombre)
         imag_cod.codificar()
         clear()
+        print("""                  =================================================""")
+        print("""                   Se ha guardado un archivo de numbre miLlave.key
+                                   si desea combiarle el nombre, no cambie el '.key'.""")
+        print("""                  =================================================""")
+        sleep(8)
+
+        clear()
         print("""                  ============================================""")
         print("""                  Muchas Gracias El Trabajo Ha Sido Completado""")
         print("""                  ============================================""")
@@ -238,7 +245,7 @@ def main():
         nombre_imagen = input("Inserta el nombre de la imagen que desea decodificar.\n(Es necesari escribirla con el formato('.png', '.jpg', '.tiff'... etc)\n--> ")
         imag_dec = Esteganew(nombre_imagen)
         clear()
-        archivo_clave = input("Ya tenemos tu mensaje, escribe el nombre del archivo con la clave para que te retornemos el mensaje:\n")
+        archivo_clave = input("Ya tenemos tu mensaje, escribe el nombre del archivo con la clave para que te retornemos el mensaje:\n--> ")
         mensaje_pre = imag_dec.decodificar()
         mensaje_post = deCRYptar(mensaje_pre,archivo_clave)
 
@@ -246,7 +253,7 @@ def main():
         clear()
 
         while True:
-            nombre_archivo = input("Inserta un nombre para el archivo de salida.\n")
+            nombre_archivo = input("Inserta un nombre para el archivo de salida.\n--> ")
             break
 
         archivo = open("{}.txt".format(nombre_archivo), "w")
@@ -255,6 +262,12 @@ def main():
         clear()
         print("""                  ============================================""")
         print("""                  Muchas Gracias El Trabajo Ha Sido Completado""")
+        print("""                  ============================================""")
+        sleep(5)
+        print("""                  ============================================""")
+        print("""                     Su mensaje se ha guardado en un archivo
+                                     '.txt' dentro de la carpeta donde se esta
+                                               corriendo el programa.""")
         print("""                  ============================================""")
         sleep(5)
         clear()

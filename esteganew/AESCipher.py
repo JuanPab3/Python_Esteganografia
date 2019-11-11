@@ -24,7 +24,7 @@ except ModuleNotFoundError:
 """
 El tipo de encriptación Fernet toma un mensaje codificado a bytes, el tiempo
 actual y una llave de 256 bits, retornando un toquen que es una representación
-indesifrable e inalterable sin el archivo llave que se implemento en un principio.
+indescifrable e inalterable sin el archivo llave que se implemento en un principio.
 
 Raises:
     ModuleNotFoundError:    Si en el sistema no está instalada la librería
@@ -58,12 +58,12 @@ def llave():
 
 def enCRYptar(mensaje):
     """
-    Esta se encarga de recibir un mensaje de tipo str, y apartir de la función
+    Esta se encarga de recibir un mensaje de tipo str, y a partir de la función
     'llave()', procesos de codificación nativos de python y el modulo de
     encriptación 'Feret' de la librería 'cryptography.fernet'
 
     Args:
-        mensaje (str): es el mmensaje que va a ser encriptado.
+        mensaje (str): es el mensaje que va a ser encriptado.
 
     Returns:
         str: mensaje ya encriptado.
@@ -87,7 +87,7 @@ def deCRYptar(mensaje,nombre_archivo):
         mensaje (str):  Mensaje previamente retornado por la función 'enCRYptar()'.
 
         nombre_archivo (str):   Nombre del archivo generado por la función
-                                'enCRYptar()', el cual porr default es
+                                'enCRYptar()', el cual por default es
                                 'miLlave.key' del cual el nombre se puede
                                 cambiar pero no la extención '.key'.
 

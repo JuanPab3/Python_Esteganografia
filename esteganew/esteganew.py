@@ -199,7 +199,7 @@ def main():
 
     if (respuesta0 == "1"):
         clear()
-        nombre_imagen = input("Inserta el nombre de la imagen que desea codificar.\n(Es necesari escribirla con el formato('.png', '.jpg', '.tiff'... etc)\n--> ")
+        nombre_imagen = input("Inserta el nombre de la imagen que desea codificar.\n(Es necesario escribirla con el formato('.png', '.jpg', '.tiff'... etc)\n--> ")
         clear()
         print("Inserta el mensaje que quiere encriptar.")
         mensaje = input("(El mensaje debe ser menor a 4095 caracteres)\n--> ")
@@ -226,8 +226,8 @@ def main():
         imag_cod.codificar()
         clear()
         print("""                  =================================================""")
-        print("""                   Se ha guardado un archivo de numbre miLlave.key
-                                   si desea combiarle el nombre, no cambie el '.key'.""")
+        print("""                  Se ha guardado un archivo de numbre miLlave.key
+                  si desea combiarle el nombre, no cambie el '.key'.""")
         print("""                  =================================================""")
         sleep(8)
 
@@ -266,8 +266,8 @@ def main():
         sleep(5)
         print("""                  ============================================""")
         print("""                     Su mensaje se ha guardado en un archivo
-                                     '.txt' dentro de la carpeta donde se esta
-                                               corriendo el programa.""")
+                        '.txt' dentro de la carpeta donde se esta
+                                corriendo el programa.""")
         print("""                  ============================================""")
         sleep(5)
         clear()
